@@ -1,0 +1,45 @@
+Project Proposal
+Project Title: 3D Motion Generator
+
+CMPUT 496 W16
+Data: 2016/1/10-2016/4/7
+Project Group Name: XXBG
+Group Members:
+XuPing Fang
+Xiaocong Zhou
+Bicheng Yan
+
+
+•	Project Summary
+1.) Project Background
+A lot of applications require large quantities of natural looking motion. Unfortunately, a lot of expertise is required to generate natural looking motions, even when proper physical modelling is applied to the character. A common solution to this problem is to capture motion data, and then derive a reconstructed skeleton model. However, capturing data suffers from two main issues. First, it is an expensive process. Second, it requires a lot of effort to generate data that fits application constraints.
+2.) Project Objectives
+•	Objective 1
+Our group will develop a 3D motion generator which is able to generate smooth transitions between any random poses automatically.
+•	Objective 2
+The motion generator will be able to regulate generated motions to give smooth and natural looking motions.
+•	Objective 3
+The motion generator allows customization by running script-like programming that specifies the goal of the motion and leaves the generation of the low-level instructions to the system.
+•	Project Methodology
+1.) The Project Approach Summary
+The first two goals are to synthesize smooth and natural looking motion data that meets several constraints. We plan on achieving that by performing two steps: first, based on natural motion data from the motion library (CMU), basic motion tracks will be generated automatically by the mathematical method (SLERP) for each joint in BVH file. Simultaneously, anatomical joint limits (degree of freedom, DOF) will be applied on the generated motions to guarantee natural looking. For customization, we plan to build a motion database, script reader, and a standardized script format which allows of efficient script reading and invoking corresponding motions from database.
+2.) Work Breakdown and Task Time Estimates
+-----------------------------------------------------------------------------
+Implement SLERP	Jan 11 – Feb 01	Bicheng	Xiaocong	
+Apply Joint Limits on BVH file	Jan 11 – Feb 01	Xuping	Xiaocong	
+Combine Task 1 & Task 2	Feb 02 – Feb 05	Bicheng	Xuping	Xiaocong
+Motion Database	Feb 06 – Mar 30	Xuping	Xiaocong	
+Script Reader	Feb 06 – Mar 30	Bicheng	Xiaocong	
+Combine all parts	Mar 31 – Apr 05	Bicheng	Xuping	Xiaocong
+-----------------------------------------------------------------------------
+
+3.) Project Deliverables
+This project will be posted on github: https://github.com/CMPUT496W16Project/ProjectCodes
+•	Reference
+•	Rose, Charles, et al. "Efficient generation of motion transitions using spacetime constraints." Proceedings of the 23rd annual conference on Computer graphics and interactive techniques. ACM, 1996. [NEW CITATION - Needs formatting (This one is the closests to our problem)]
+•	Arikan, Okan, and David A. Forsyth. "Interactive motion generation from examples." ACM Transactions on Graphics (TOG). Vol. 21. No. 3. ACM, 2002. [NEW CITATION - Needs formatting (Also important)]
+•	Witkin, Andrew, and Zoran Popovic. "Motion warping." Proceedings of the 22nd annual conference on Computer graphics and interactive techniques. ACM, 1995. [NEW CITATION - Needs formatting]
+•	Gleicher, Michael. "Motion editing with spacetime constraints." Proceedings of the 1997 symposium on Interactive 3D graphics. ACM, 1997. [NEW CITATION - Needs formatting]
+•	J. Kang, B. Badi, Y. Zhao and D. K. Wright. "Human Motion Modeling and Simulation by Anatomical Approach" School of Engineering and Design, Brunel University http://www.brunel.ac.uk/about/acad/sed/sedstaff/design/JinshengKang/
+•	Masahiro Mori. "The Uncanny Valley" Energy, 7(4), pp. 33-35, 1970. Translated by Karl F. MacDorman and Takashi Minato
+•	Min Je Park, Min Gyu Choi, Sung Yong Shin. "Human motion reconstruction from inter-frame feature correspondences of a single video stream using a motion library" Proceedings of the 2002 ACM SIGGRAPH/Eurographics symposium on Computer animation Pages 113-120, ISBN:1-58113-573-4.
