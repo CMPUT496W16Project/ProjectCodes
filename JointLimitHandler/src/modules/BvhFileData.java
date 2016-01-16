@@ -24,4 +24,8 @@ public class BvhFileData {
 	public ArrayList<Double> getFrameByFrameIndex(int frameIndex){
 		return this.frames.get(frameIndex);
 	}
+	
+	public int getNumOfFrames(){
+		return this.frames.size();
+	}
 }
