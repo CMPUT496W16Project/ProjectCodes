@@ -7,7 +7,7 @@ public class BvhFileData {
 	
 	private String bvhFilePath;
 	
-	public ArrayList<String> bvhHeader;
+	private ArrayList<String> bvhHeader;
 	
 	private Map<Integer,ArrayList<Double>> frames;
 	
@@ -27,5 +27,9 @@ public class BvhFileData {
 	
 	public int getNumOfFrames(){
 		return this.frames.size();
+	}
+	
+	public ArrayList<String> getBvhHeader(){
+		return this.bvhHeader;
 	}
 }

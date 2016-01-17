@@ -6,12 +6,16 @@ public class Node {
 	
 	private NodeKey nodeKey;
 	private ArrayList<Channel> channels;
-	private ArrayList<NodeKey> childs;
+	private ArrayList<Integer> childs;
 	
-	public Node(NodeKey nodeKey,ArrayList<Channel> channels,ArrayList<NodeKey> childs){
+	public Node(NodeKey nodeKey,ArrayList<Channel> channels){
 		this.nodeKey=nodeKey;
 		this.channels=channels;
-		this.childs=childs;
+		this.childs=new ArrayList<Integer>();
+	}
+	
+	public NodeKey getNodeKey(){
+		return this.nodeKey;
 	}
 	
 	public String getNodeName(){
@@ -42,7 +46,25 @@ public class Node {
 		}
 	}
 	
-	public ArrayList<NodeKey> getChilds(){
+	public void addChildByIndex(Integer nodeIndex){
+		this.childs.add(nodeIndex);
+	}
+	
+	public ArrayList<Integer> getChildIndexes(){
 		return this.childs;
+	}
+	
+	public void printNodeInformation(){
+		System.out.println("Node Index : "+this.nodeKey.getNodeIndex().toString());
+		System.out.println("Node Name  : "+this.nodeKey.getNodeName());
+		System.out.println("Channels   :");
+		for(Channel c : this.channels){
+			c.printChannelInformation();
+		}
+		System.out.print("Childs   :");
+		for(Integer i : this.childs){
+			System.out.print(i.toString()+" ");
+		}
+		System.out.println();
 	}
 }

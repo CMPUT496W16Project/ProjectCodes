@@ -27,4 +27,8 @@ public class Channel{
 	public Double getChannelValue(){
 		return this.channelValue;
 	}
+	
+	public void printChannelInformation(){
+		System.out.println(this.channelIndex.toString()+" "+this.channelName);
+	}
 }

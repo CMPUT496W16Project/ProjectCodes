@@ -49,7 +49,6 @@ public class BvhFileReader {
 			while ((line=bufferedReader.readLine()) != null){
 				
 				bvhHeader.add(line);
-				System.out.println(line);
 					
 				if (line.contains("Frame Time")){
 					break;
