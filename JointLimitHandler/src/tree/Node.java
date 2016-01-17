@@ -61,7 +61,7 @@ public class Node {
 		for(Channel c : this.channels){
 			c.printChannelInformation();
 		}
-		System.out.print("Childs   :");
+		System.out.print("Childs   : ");
 		for(Integer i : this.childs){
 			System.out.print(i.toString()+" ");
 		}
