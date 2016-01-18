@@ -58,15 +58,16 @@ public class Node {
 		return null;
 	}
 	
-	public void setChannelValueByIndex(int channelIndex,Double channelValue){
+	public boolean setChannelValueByIndex(int channelIndex,Double channelValue){
 		for(int index=0;index<this.channels.size();index++){
 			if(this.channels.get(index).getChannelIndex()==channelIndex){
 				Channel channel=this.channels.get(index);
 				channel.setChannelValue(channelValue);
 				this.channels.set(index,channel);
-				return;
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	public void addChildByIndex(Integer nodeIndex){

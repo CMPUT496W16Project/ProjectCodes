@@ -1,6 +1,7 @@
 package tree;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,5 +25,15 @@ public class Tree {
 		for(Node node : this.tree.values()){
 			node.printNodeInformation();
 		}
+	}
+	
+	public ArrayList<Node> getNodeIndexByName(String nodeName){
+		ArrayList<Node> nodes=new ArrayList<Node>();
+		for(int index=0;index<this.tree.size();index++){
+			if(this.tree.get(index).getNodeName().equals(nodeName)){
+				nodes.add(this.tree.get(index));
+			}
+		}
+		return nodes;
 	}
 }
