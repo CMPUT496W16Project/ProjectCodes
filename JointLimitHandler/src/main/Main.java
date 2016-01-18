@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args){
 		
 		BvhFileReader bvhFileReader=new BvhFileReader();
-		bvhFileReader.setBvhFilePath("Hard code file path");
+		bvhFileReader.setBvhFilePath("HardCode Path");
 		BvhFileData bvhFileData=bvhFileReader.getCurrentBvhFileDataAsObject();
 		
 		TreeConverter tc=new TreeConverter();

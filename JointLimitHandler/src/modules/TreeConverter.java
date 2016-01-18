@@ -28,11 +28,15 @@ public class TreeConverter {
 		Tree tree=new Tree();
 		Stack<Integer> stack=new Stack<Integer>();
 		
+		Node node=null;
+		
 		int currentNodeIndex=0;
 		NodeKey currentNodeKey=null;
 		
 		int currentChannelIndex=0;
 		ArrayList<Channel> currentChannels=new ArrayList<Channel>();
+		
+		boolean isEndSite=false;
 		
 		for(String line : bvhHeader){
 			
@@ -53,6 +57,22 @@ public class TreeConverter {
 				else{
 					currentNodeKey=new NodeKey(currentNodeIndex,currentLine[1]);
 				}
+				currentNodeIndex++;
+			}
+			// End case, add a node without channels.
+			else if(line.contains("End Site")){
+				currentNodeKey=new NodeKey(currentNodeIndex,"End Site");
+				currentNodeIndex++;
+				isEndSite=true;
+			}
+			// Offset case, record the offset.
+			else if(line.contains("OFFSET")){
+				node=new Node(currentNodeKey);
+				node.setOffset(Double.parseDouble(currentLine[2]),Double.parseDouble(currentLine[3]),Double.parseDouble(currentLine[4]));
+				if(isEndSite){
+					tree.putNode(node);
+					isEndSite=false;
+				}
 			}
 			// Channel case.
 			else if(line.contains("CHANNELS")){
@@ -62,21 +82,13 @@ public class TreeConverter {
 					currentChannels.add(channel);
 					currentChannelIndex++;
 				}
-				Node node=new Node(currentNodeKey,this.makeCopy(currentChannels));
+				node.setChannels(this.makeCopy(currentChannels));
 				tree.putNode(node);
-				currentNodeIndex++;
 				currentChannels.clear();
-			}
-			// End case, add a node without channels.
-			else if(line.contains("End Site")){
-				currentNodeKey=new NodeKey(currentNodeIndex,"End Site");
-				Node node=new Node(currentNodeKey,this.makeCopy(currentChannels));
-				tree.putNode(node);
-				currentNodeIndex++;
 			}
 			// '{' case, push the stack.
 			else if(line.contains("{")){
-				stack.push(currentNodeIndex);
+				stack.push(currentNodeIndex-1);
 			}
 			// '}' case, pop the stack and link the node.
 			else if(line.contains("}")){

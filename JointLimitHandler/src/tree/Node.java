@@ -8,10 +8,33 @@ public class Node {
 	private ArrayList<Channel> channels;
 	private ArrayList<Integer> childs;
 	
-	public Node(NodeKey nodeKey,ArrayList<Channel> channels){
+	private Double offsetX;
+	private Double offsetY;
+	private Double offsetZ;
+	
+	public Node(NodeKey nodeKey){
 		this.nodeKey=nodeKey;
-		this.channels=channels;
 		this.childs=new ArrayList<Integer>();
+	}
+	
+	public void setChannels(ArrayList<Channel> channels){
+		this.channels=channels;
+	}
+	
+	public void setOffset(Double offsetX,Double offsetY,Double offsetZ){
+		this.offsetX=offsetX;
+		this.offsetY=offsetY;
+		this.offsetZ=offsetZ;
+	}
+	
+	public Double getOffset(String axis){
+		if(axis.equals("X")){
+			return this.offsetX;
+		}
+		else if(axis.equals("Y")){
+			return this.offsetY;
+		}
+		return this.offsetZ;
 	}
 	
 	public NodeKey getNodeKey(){
@@ -57,11 +80,14 @@ public class Node {
 	public void printNodeInformation(){
 		System.out.println("Node Index : "+this.nodeKey.getNodeIndex().toString());
 		System.out.println("Node Name  : "+this.nodeKey.getNodeName());
+		System.out.println("Offsets    : "+this.offsetX.toString()+" "+this.offsetY.toString()+" "+this.offsetZ.toString());
 		System.out.println("Channels   :");
-		for(Channel c : this.channels){
-			c.printChannelInformation();
+		if(this.channels!=null){
+			for(Channel c : this.channels){
+				c.printChannelInformation();
+			}
 		}
-		System.out.print("Childs   : ");
+		System.out.print("Childs     : ");
 		for(Integer i : this.childs){
 			System.out.print(i.toString()+" ");
 		}
