@@ -18,8 +18,8 @@ public class Main {
 		Tree tree=tc.convert(bvhFileData.getBvhHeader());
 		tree.printAllNodeInformation();
 		
-		DirectionCalculator dc=new DirectionCalculator();
-		dc.getFaceAxis(tree);
+		DirectionCalculator dc=new DirectionCalculator(tree);
+		dc.getDirectionInfromation();
 	}
 
 }

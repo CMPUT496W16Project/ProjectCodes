@@ -102,7 +102,6 @@ public class TreeConverter {
 					}
 			}
 		}
-		
 		return tree;
 	}
 }

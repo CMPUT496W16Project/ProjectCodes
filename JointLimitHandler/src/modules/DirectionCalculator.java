@@ -1,60 +1,86 @@
 package modules;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import tree.Node;
 import tree.Tree;
 
 public class DirectionCalculator {
-
-	public DirectionCalculator(){}
 	
-	public void getFaceAxis(Tree tree){
-		String roughFaceDirection=this.getRoughFacePlane(tree);
-		Node spine=tree.getNodebyIndex(14);
+	private Node upperLegA;
+	private Node upperLegB;
+	private Node spine;
+
+	public DirectionCalculator(Tree tree){
+		this.upperLegA=tree.getNodebyIndex(2);
+		this.upperLegB=tree.getNodebyIndex(8);
+		this.spine=tree.getNodebyIndex(14);
+	}
+	
+	public Map<String,Integer> getDirectionInfromation(){
 		
-		ArrayList<Integer> axisIndexes=new ArrayList<Integer>();
-		if(roughFaceDirection.equals("ZY")){
-			axisIndexes.add(1);
-			axisIndexes.add(2);
+		String roughFacePlane=this.getRoughFacePlane();
+		
+		ArrayList<Integer> planeAxisIndexes=new ArrayList<Integer>();
+		
+		if(roughFacePlane.equals("ZY")){
+			planeAxisIndexes.add(1);
+			planeAxisIndexes.add(2);
 		}
-		else if(roughFaceDirection.equals("XY")){
-			axisIndexes.add(0);
-			axisIndexes.add(2);
+		else if(roughFacePlane.equals("XY")){
+			planeAxisIndexes.add(0);
+			planeAxisIndexes.add(2);
 		}
-		else if(roughFaceDirection.equals("XZ")){
-			axisIndexes.add(0);
-			axisIndexes.add(1);
+		else if(roughFacePlane.equals("XZ")){
+			planeAxisIndexes.add(0);
+			planeAxisIndexes.add(1);
 		}
 		else{
-			return;
+			return null;
 		}
 		
-		int faceAxisIndex=0;
+		int upAxisIndex=-1;
+		int upDirection=0;
+		
+		int faceAxisIndex=-1;
 		int faceDirection=0;
 		
 		ArrayList<Integer> angleRelatedAxis=new ArrayList<Integer>();
 		
-		if(Math.abs(spine.getOffset(axisIndexes.get(0)))>Math.abs(axisIndexes.get(1))){
-			faceAxisIndex=axisIndexes.get(1);
-			angleRelatedAxis=axisIndexes;
+		if(Math.abs(spine.getOffset(planeAxisIndexes.get(0)))>Math.abs(planeAxisIndexes.get(1))){
+			faceAxisIndex=planeAxisIndexes.get(1);
+			upAxisIndex=planeAxisIndexes.get(0);
+			
+			angleRelatedAxis=planeAxisIndexes;
 		}
-		else if(Math.abs(spine.getOffset(axisIndexes.get(0)))<Math.abs(axisIndexes.get(1))){
-			faceAxisIndex=axisIndexes.get(0);
-			angleRelatedAxis.add(axisIndexes.get(1));
-			angleRelatedAxis.add(axisIndexes.get(0));
+		else if(Math.abs(spine.getOffset(planeAxisIndexes.get(0)))<Math.abs(planeAxisIndexes.get(1))){
+			faceAxisIndex=planeAxisIndexes.get(0);
+			upAxisIndex=planeAxisIndexes.get(1);
+			
+			angleRelatedAxis.add(planeAxisIndexes.get(1));
+			angleRelatedAxis.add(planeAxisIndexes.get(0));
 		}
-		else if(Math.abs(spine.getOffset(axisIndexes.get(0)))==Math.abs(axisIndexes.get(1))){
-			return;
+		else if(Math.abs(spine.getOffset(planeAxisIndexes.get(0)))==Math.abs(planeAxisIndexes.get(1))){
+			return null;
+		}
+		
+		if(spine.getOffset(upAxisIndex)>=0){
+			upDirection=1;
+		}
+		else{
+			upDirection=-1;
+		}
+		
+		if(upAxisIndex==2){
+			upDirection=-upDirection;
 		}
 		
 		
-		Node upperLegA=tree.getNodebyIndex(2);
-		Node upperLegB=tree.getNodebyIndex(8);
 		Double upperLegAxisAAvg=(upperLegA.getOffset(angleRelatedAxis.get(0))+upperLegB.getOffset(angleRelatedAxis.get(0)))/2;
 		Double upperLegAxisBAvg=(upperLegA.getOffset(angleRelatedAxis.get(1))+upperLegB.getOffset(angleRelatedAxis.get(1)))/2;
 		
-
 		if(spine.getOffset(angleRelatedAxis.get(1))>0 && upperLegAxisBAvg>0){
 			faceDirection=1;
 		}
@@ -85,58 +111,68 @@ public class DirectionCalculator {
 			faceDirection=-faceDirection;
 		}
 		
-		System.out.println(faceDirection+" "+faceAxisIndex);
+		Map<String,Integer> directionInformation=new HashMap<String,Integer>();
+		directionInformation.put("Face Direction",faceDirection);
+		System.out.println(faceDirection+" "+upDirection);
+		System.out.println(upDirection+" "+upAxisIndex);
+		directionInformation.put("Face Axis",faceAxisIndex);
+		directionInformation.put("Up Direction",upDirection);
+		directionInformation.put("Up Axis",upAxisIndex);
+		
+		return directionInformation;
 	}
 	
-	private String getRoughFacePlane(Tree tree){
-		Node upperLegA=tree.getNodebyIndex(2);
-		Node upperLegB=tree.getNodebyIndex(8);
+	private Double getLengthToOrigin(Node node){
+		return Math.sqrt(Math.pow(node.getOffset(0),2)+Math.pow(node.getOffset(1),2)+Math.pow(node.getOffset(2),2));
+	}
+	
+	private String getRoughFacePlane(){
 		
-		Double lengthA=Math.sqrt(Math.pow(upperLegA.getOffset(0),2)+Math.pow(upperLegA.getOffset(1),2)+Math.pow(upperLegA.getOffset(2),2));
-		Double lengthB=Math.sqrt(Math.pow(upperLegB.getOffset(0),2)+Math.pow(upperLegB.getOffset(1),2)+Math.pow(upperLegB.getOffset(2),2));
+		Double lengthA=this.getLengthToOrigin(upperLegA);
+		Double lengthB=this.getLengthToOrigin(upperLegB);
 		Double avgLength=(lengthA+lengthB)/2;
 		
-		Double diffA=Math.abs(upperLegA.getOffset(0)-upperLegB.getOffset(0));
-		Double diffB=Math.abs(upperLegA.getOffset(1)-upperLegB.getOffset(1));
-		Double diffC=Math.abs(upperLegA.getOffset(2)-upperLegB.getOffset(2));
+		Double diffX=Math.abs(upperLegA.getOffset(0)-upperLegB.getOffset(0));
+		Double diffZ=Math.abs(upperLegA.getOffset(1)-upperLegB.getOffset(1));
+		Double diffY=Math.abs(upperLegA.getOffset(2)-upperLegB.getOffset(2));
 		
-		Boolean flagA=false;
-		Boolean flagB=false;
-		Boolean flagC=false;
+		Boolean flagX=false;
+		Boolean flagZ=false;
+		Boolean flagY=false;
 		
-		if(diffA/avgLength>=0.5){
-			flagA=true;
+		if(diffX/avgLength>=0.5){
+			flagX=true;
 		}
-		if(diffB/avgLength>=0.5){
-			flagB=true;
+		if(diffZ/avgLength>=0.5){
+			flagZ=true;
 		}
-		if(diffC/avgLength>=0.5){
-			flagC=true;
+		if(diffY/avgLength>=0.5){
+			flagY=true;
 		}
 		
-		if(flagA && flagB==false && flagC==false){
+		if(flagX && flagZ==false && flagY==false){
 			return "ZY";
 		}
-		else if(flagA==false && flagB && flagC==false){
+		else if(flagX==false && flagZ && flagY==false){
 			return "XY";
 		}
-		else if(flagA==false && flagB==false && flagC){
+		else if(flagX==false && flagZ==false && flagY){
 			return "XZ";
 		}
 		else{
-			Double max=Math.max(diffA,Math.max(diffB,diffC));
+			Double max=Math.max(diffX,Math.max(diffZ,diffY));
 			
-			if(max==diffA){
+			if(max==diffX){
 				return "ZY";
 			}
-			else if(max==diffB){
+			else if(max==diffZ){
 				return "XY";
 			}
-			else if(max==diffC){
+			else if(max==diffY){
 				return "XZ";
 			}
 			else{
-				return "Unknown";
+				return null;
 			}
 		}
 	}
