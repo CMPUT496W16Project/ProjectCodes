@@ -6,7 +6,7 @@ import java.util.Map;
 import tree.Node;
 import tree.Tree;
 
-public class LimitRule {
+public class Core {
 	
 	private String faceAxis;
 	private Integer faceDirection;
@@ -19,7 +19,7 @@ public class LimitRule {
 	private ArrayList<String> axises=new ArrayList<String>();
 	private ArrayList<String> channels=new ArrayList<String>();
 	
-	public LimitRule(Map<String,Integer> directionInformation){
+	public Core(Map<String,Integer> directionInformation){
 		
 		axises.add("X");
 		axises.add("Z");
@@ -39,9 +39,5 @@ public class LimitRule {
 		
 		this.faceDirection=directionInformation.get("Face Direction");
 		this.upDirection=directionInformation.get("Up Direction");
-	}
-	
-	private void applyUpperLegRule(int nodeIndex){
-		
 	}
 }
