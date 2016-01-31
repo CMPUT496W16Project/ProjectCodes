@@ -78,6 +78,10 @@ public class Node {
 		return this.childs;
 	}
 	
+	public int getFirstChannelIndex(){
+		return this.channels.get(0).getChannelIndex();
+	}
+	
 	public void printNodeInformation(){
 		System.out.println("Node Index : "+this.nodeKey.getNodeIndex().toString());
 		System.out.println("Node Name  : "+this.nodeKey.getNodeName());
