@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String[] args){
 		
 		BvhFileReader bvhFileReader=new BvhFileReader();
-		bvhFileReader.setBvhFilePath("C:\\Users\\xiaocong\\Desktop\\BVHfiles\\01\\01_01.bvh");
+		bvhFileReader.setBvhFilePath("C:\\Users\\Xuping Fang\\Desktop\\CMPUT496\\BVH files\\01\\01_01.bvh");
 		BvhFileData bvhFileData=bvhFileReader.getCurrentBvhFileDataAsObject();
 		
 		TreeConverter tc=new TreeConverter();

@@ -40,4 +40,8 @@ public class Core {
 		this.faceDirection=directionInformation.get("Face Direction");
 		this.upDirection=directionInformation.get("Up Direction");
 	}
+	
+	private void generateBodyPartIndex(){
+		
+	}
 }
