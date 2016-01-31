@@ -113,8 +113,6 @@ public class DirectionCalculator {
 		
 		Map<String,Integer> directionInformation=new HashMap<String,Integer>();
 		directionInformation.put("Face Direction",faceDirection);
-		System.out.println(faceDirection+" "+faceAxisIndex);
-		System.out.println(upDirection+" "+upAxisIndex);
 		directionInformation.put("Face Axis",faceAxisIndex);
 		directionInformation.put("Up Direction",upDirection);
 		directionInformation.put("Up Axis",upAxisIndex);

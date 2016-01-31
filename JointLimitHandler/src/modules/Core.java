@@ -1,6 +1,7 @@
 package modules;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import tree.Node;
@@ -18,6 +19,7 @@ public class Core {
 	
 	private ArrayList<String> axises=new ArrayList<String>();
 	private ArrayList<String> channels=new ArrayList<String>();
+	private Map<String,Integer> bodyPartsDictionary=new HashMap<String,Integer>();
 	
 	public Core(Map<String,Integer> directionInformation){
 		
@@ -39,9 +41,17 @@ public class Core {
 		
 		this.faceDirection=directionInformation.get("Face Direction");
 		this.upDirection=directionInformation.get("Up Direction");
+		System.out.println("==========================================");
+		System.out.println("Core system initializing...");
+		System.out.println("Facing axis      	: "+this.faceAxis);
+		System.out.println("Facing direction 	: "+this.faceDirection);
+		System.out.println("Up axis 			: "+this.upAxis);
+		System.out.println("Up direction		: "+this.upDirection);
+		System.out.println("Remain Axis         : "+this.remainAxis);
+		System.out.println("------------------------------------------");
 	}
 	
 	private void generateBodyPartIndex(){
-		
+		bodyPartsDictionary.put("Hip",0);
 	}
 }
