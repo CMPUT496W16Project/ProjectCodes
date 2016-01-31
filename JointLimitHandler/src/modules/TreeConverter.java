@@ -42,13 +42,6 @@ public class TreeConverter {
 			
 			String[] currentLine = line.split("\\s+");
 			
-			/*
-			for(String frag : currentLine){
-				System.out.println(frag);
-			}
-			System.out.println();
-			*/
-			
 			// Root/Joint case.
 			if(line.contains("ROOT") || line.contains("JOINT")){
 				if(line.contains("JOINT")){
@@ -78,7 +71,7 @@ public class TreeConverter {
 			else if(line.contains("CHANNELS")){
 				int numOfChannels=Integer.parseInt(currentLine[2]);
 				for(int index=0;index<numOfChannels;index++){
-					Channel channel=new Channel(currentChannelIndex,currentLine[3+index],0.0);
+					Channel channel=new Channel(currentChannelIndex,currentLine[3+index]);
 					currentChannels.add(channel);
 					currentChannelIndex++;
 				}

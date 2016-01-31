@@ -49,27 +49,6 @@ public class Node {
 		return this.nodeKey.getNodeIndex();
 	}
 	
-	public Double getChannelValueByIndex(int channelIndex){
-		for(int index=0;index<this.channels.size();index++){
-			if(this.channels.get(index).getChannelIndex()==channelIndex){
-				return this.channels.get(index).getChannelValue();
-			}
-		}
-		return null;
-	}
-	
-	public boolean setChannelValueByIndex(int channelIndex,Double channelValue){
-		for(int index=0;index<this.channels.size();index++){
-			if(this.channels.get(index).getChannelIndex()==channelIndex){
-				Channel channel=this.channels.get(index);
-				channel.setChannelValue(channelValue);
-				this.channels.set(index,channel);
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	public void addChildByIndex(Integer nodeIndex){
 		this.childs.add(nodeIndex);
 	}
@@ -78,11 +57,16 @@ public class Node {
 		return this.childs;
 	}
 	
-	public int getFirstChannelIndex(){
-		return this.channels.get(0).getChannelIndex();
+	public Channel getChannelInformation(int localChannelIndex){
+		return this.channels.get(localChannelIndex);
+	}
+	
+	public Integer getGlobalChannelIndex(int localChannelIndex){
+		return this.channels.get(localChannelIndex).getChannelIndex();
 	}
 	
 	public void printNodeInformation(){
+		System.out.println("");
 		System.out.println("Node Index : "+this.nodeKey.getNodeIndex().toString());
 		System.out.println("Node Name  : "+this.nodeKey.getNodeName());
 		System.out.println("Offsets    : "+this.offsetX.toString()+" "+this.offsetZ.toString()+" "+this.offsetY.toString());
@@ -91,11 +75,12 @@ public class Node {
 			for(Channel c : this.channels){
 				c.printChannelInformation();
 			}
+			System.out.println("");
 		}
 		System.out.print("Childs     : ");
-		for(Integer i : this.childs){
-			System.out.print(i.toString()+" ");
+		for(Integer childIndex : this.childs){
+			System.out.print(childIndex.toString()+" ");
 		}
-		System.out.println();
+		System.out.println("");
 	}
 }

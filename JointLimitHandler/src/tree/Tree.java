@@ -22,9 +22,11 @@ public class Tree {
 	}
 	
 	public void printAllNodeInformation(){
+		System.out.println("Node Informations:");
 		for(Node node : this.tree.values()){
 			node.printNodeInformation();
 		}
+		System.out.println("==================");
 	}
 	
 	public ArrayList<Node> getNodeIndexByName(String nodeName){
