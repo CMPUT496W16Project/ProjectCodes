@@ -29,7 +29,7 @@ public class Tree {
 		System.out.println("==================");
 	}
 	
-	public ArrayList<Node> getNodeIndexByName(String nodeName){
+	public ArrayList<Node> getNodeSetByName(String nodeName){
 		ArrayList<Node> nodes=new ArrayList<Node>();
 		for(int index=0;index<this.tree.size();index++){
 			if(this.tree.get(index).getNodeName().equals(nodeName)){

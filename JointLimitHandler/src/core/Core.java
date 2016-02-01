@@ -31,7 +31,7 @@ public class Core {
 	
 	//=============
 	
-	private Map<String,Integer> bodyPartsDictionary=new HashMap<String,Integer>();
+	//private Map<String,Integer> bodyPartsDictionary=new HashMap<String,Integer>();
 	
 	public Core(BvhFileData bvhFileData){
 		
@@ -92,7 +92,9 @@ public class Core {
 		this.upDirection=directionInformation.get("Up Direction");
 	}
 	
-	private void generateBodyPartIndex(){
-		bodyPartsDictionary.put("Hip",0);
-	}
+	//private void generateBodyPartIndex(){
+		
+	//}
+	
+	
 }
