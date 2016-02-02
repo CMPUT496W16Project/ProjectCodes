@@ -206,7 +206,7 @@ public class Core {
 		PrintWriter printWriter;
 		
 		try {
-			printWriter = new PrintWriter("C:\\Users\\Xuping Fang\\Desktop\\CMPUT496\\BVH files\\01\\01_01_F.bvh","UTF-8");
+			printWriter = new PrintWriter("XXXXXXXXX","UTF-8");
 			
 			// Write the header of the file.
 			for(String line : this.bvhFileData.getBvhHeader()){
