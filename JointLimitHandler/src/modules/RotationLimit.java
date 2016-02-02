@@ -27,7 +27,7 @@ public class RotationLimit {
 		Map<String,ArrayList<Double>> rule=new HashMap<String,ArrayList<Double>>();
 		
 		ArrayList<Double> faceAxisbounds=new ArrayList<Double>();
-		faceAxisbounds.add(-30.00);
+		faceAxisbounds.add(-35.00);
 		faceAxisbounds.add(50.00);
 		
 		ArrayList<Double> upAxisbounds=new ArrayList<Double>();
@@ -50,7 +50,7 @@ public class RotationLimit {
 		
 		ArrayList<Double> faceAxisbounds=new ArrayList<Double>();
 		faceAxisbounds.add(-50.00);
-		faceAxisbounds.add(30.00);
+		faceAxisbounds.add(35.00);
 		
 		ArrayList<Double> upAxisbounds=new ArrayList<Double>();
 		upAxisbounds.add(-45.00);
