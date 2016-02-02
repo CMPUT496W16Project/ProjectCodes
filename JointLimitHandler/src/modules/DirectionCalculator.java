@@ -136,7 +136,34 @@ public class DirectionCalculator {
 				remainDirection=-1;
 			}
 		}
+		else if(faceAxisIndex==1 && upAxisIndex==0){
+			remainAxisIndex=2;
+			if((faceDirection==1 && upDirection==1) || (faceDirection==-1 && upDirection==-1)){
+				remainDirection=1;
+			}
+			else if((faceDirection==1 && upDirection==-1)||(faceDirection==-1 && upDirection==1)){
+				remainDirection=-1;
+			}
+		}
 		else if(faceAxisIndex==1 && upAxisIndex==2){
+			remainAxisIndex=0;
+			if((faceDirection==1 && upDirection==1) || (faceDirection==-1 && upDirection==-1)){
+				remainDirection=-1;
+			}
+			else if((faceDirection==1 && upDirection==-1)||(faceDirection==-1 && upDirection==1)){
+				remainDirection=1;
+			}
+		}
+		else if(faceAxisIndex==2 && upAxisIndex==0){
+			remainAxisIndex=1;
+			if((faceDirection==1 && upDirection==1) || (faceDirection==-1 && upDirection==-1)){
+				remainDirection=-1;
+			}
+			else if((faceDirection==1 && upDirection==-1)||(faceDirection==-1 && upDirection==1)){
+				remainDirection=1;
+			}
+		}
+		else if(faceAxisIndex==2 && upAxisIndex==1){
 			remainAxisIndex=0;
 			if((faceDirection==1 && upDirection==1) || (faceDirection==-1 && upDirection==-1)){
 				remainDirection=1;

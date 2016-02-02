@@ -1,5 +1,8 @@
 package core;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -79,27 +82,52 @@ public class Core {
 		this.remainDirection=directionInformation.get("Remain Direction");
 	}
 	
-	public void applyLimitOnAFrame(int frameIndex){
+	public void execute(){
+		
+		for(int frameIndex=0;frameIndex<this.bvhFileData.getNumOfFrames();frameIndex++){
+			this.applyLimitOnAFrame(frameIndex);
+		}
+	}
+	
+	private void applyLimitOnAFrame(int frameIndex){
+		//System.out.println("Start check frame "+frameIndex);
 		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"LeftUpLeg");
+		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"RightUpLeg");
+		//System.out.println("==================");
 	}
 	
 	
-	private ArrayList<Double> applyLimitOnANode(ArrayList<Double> frame,String nodeName){
+	private void applyLimitOnANode(ArrayList<Double> frame,String nodeName){
 		Node node=this.tree.getNodeSetByName(nodeName).get(0);
 		Map<String,ArrayList<Double>> rule=this.rotationLimit.getRuleByName(nodeName);
 		
+		//Get bounded values:
+		//For face Axis
 		ArrayList<Double> faceAxisbounds=rule.get("+faceAxis");
 		if(this.faceDirection==-1){
 			faceAxisbounds=this.reverseSign(faceAxisbounds);
 		}
-		
+		if(this.faceAxis.equals("Y")){
+			faceAxisbounds=this.reverseSign(faceAxisbounds);
+		}
+		//For up Axis
 		ArrayList<Double> upAxisbounds=rule.get("+upAxis");
 		if(this.upDirection==-1){
 			upAxisbounds=this.reverseSign(upAxisbounds);
 		}
-		
+		if(this.upAxis.equals("Y")){
+			upAxisbounds=this.reverseSign(upAxisbounds);
+		}
+		//For remain Axis
 		ArrayList<Double> remainAxisbounds=rule.get("+remainAxis");
+		if(this.remainDirection==-1){
+			remainAxisbounds=this.reverseSign(remainAxisbounds);
+		}
+		if(this.remainAxis.equals("Y")){
+			remainAxisbounds=this.reverseSign(remainAxisbounds);
+		}
 		
+		// Set global channel index
 		int faceAxisChannelIndex=-1;
 		int upAxisChannelIndex=-1;
 		int remainAxisChannelIndex=-1;
@@ -137,40 +165,81 @@ public class Core {
 		//=======================================================
 		
 		if(frame.get(faceAxisChannelIndex)>faceAxisbounds.get(1)){
+			System.out.println("Bad angle : "+frame.get(faceAxisChannelIndex)+"  in faceAxis of node: "+nodeName+", resetValue");
 			frame.set(faceAxisChannelIndex,faceAxisbounds.get(1));
-			System.out.println("Bad angle in faceAxis of node: "+nodeName+", resetValue");
 		}
 		else if(frame.get(faceAxisChannelIndex)<faceAxisbounds.get(0)){
+			System.out.println("Bad angle : "+frame.get(faceAxisChannelIndex)+" in faceAxis of node: "+nodeName+", resetValue");
 			frame.set(faceAxisChannelIndex,faceAxisbounds.get(0));
-			System.out.println("Bad angle in faceAxis of node: "+nodeName+", resetValue");
 		}
 		
 		if(frame.get(upAxisChannelIndex)>upAxisbounds.get(1)){
+			System.out.println("Bad angle : "+frame.get(upAxisChannelIndex)+" in upAxis of node: "+nodeName+", resetValue");
 			frame.set(upAxisChannelIndex,upAxisbounds.get(1));
-			System.out.println("Bad angle in upAxis of node: "+nodeName+", resetValue");
 		}
 		else if(frame.get(upAxisChannelIndex)<upAxisbounds.get(0)){
+			System.out.println("Bad angle : "+frame.get(upAxisChannelIndex)+" in upAxis of node: "+nodeName+", resetValue");
 			frame.set(upAxisChannelIndex,upAxisbounds.get(0));
-			System.out.println("Bad angle in upAxis of node: "+nodeName+", resetValue");
 		}
 		
-		if(frame.get(faceAxisChannelIndex)>faceAxisbounds.get(1)){
-			frame.set(faceAxisChannelIndex,faceAxisbounds.get(1));
-			System.out.println("Bad angle in remainAxis of node: "+nodeName+", resetValue");
+		if(frame.get(remainAxisChannelIndex)>remainAxisbounds.get(1)){
+			System.out.println("Bad angle : "+frame.get(remainAxisChannelIndex)+" in remainAxis of node: "+nodeName+", resetValue");
+			frame.set(remainAxisChannelIndex,remainAxisbounds.get(1));
 		}
 		else if(frame.get(remainAxisChannelIndex)<remainAxisbounds.get(0)){
+			System.out.println("Bad angle : "+frame.get(remainAxisChannelIndex)+" in remainAxis of node: "+nodeName+", resetValue");
 			frame.set(remainAxisChannelIndex,remainAxisbounds.get(0));
-			System.out.println("Bad angle in remainAxis of node: "+nodeName+", resetValue");
 		}
-		
-		return frame;
 	}
 	
 	private ArrayList<Double> reverseSign(ArrayList<Double> bound){
 		Double tmp0=-bound.get(0);
 		Double tmp1=-bound.get(1);
-		bound.set(0,tmp1);
-		bound.set(1,tmp0);
-		return bound;
+		ArrayList<Double> reverse=new ArrayList<Double>();
+		reverse.add(tmp1);
+		reverse.add(tmp0);
+		return reverse;
+	}
+	
+	public void writeFixedFile(){
+		
+		PrintWriter printWriter;
+		
+		try {
+			printWriter = new PrintWriter("C:\\Users\\Xuping Fang\\Desktop\\CMPUT496\\BVH files\\01\\01_01_F.bvh","UTF-8");
+			
+			// Write the header of the file.
+			for(String line : this.bvhFileData.getBvhHeader()){
+				printWriter.println(line);
+			}
+			
+			// Write each frame of the frame data after package loss.
+			for(int index=0;index<this.bvhFileData.getNumOfFrames();index++){
+				
+				String line="";
+				
+				ArrayList<Double> currentFrame=this.bvhFileData.getFrameByFrameIndex(index);
+				// Construct a string based on the frame data in the ArrayList.
+				for(int nodeIndex=0;nodeIndex<currentFrame.size();nodeIndex++){
+					line+=currentFrame.get(nodeIndex);
+					if(nodeIndex==currentFrame.size()-1){
+						break;
+					}
+					line+=" ";
+				}
+				
+				// Write the frame to the file
+				printWriter.println(line);
+				
+			}
+			
+			printWriter.close();
+		} 
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} 
+		catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -10,12 +10,15 @@ public class Main {
 	public static void main(String[] args){
 		
 		BvhFileReader bvhFileReader=new BvhFileReader();
-		bvhFileReader.setBvhFilePath("XXXXXXXXX");
+		bvhFileReader.setBvhFilePath("C:\\Users\\Xuping Fang\\Desktop\\CMPUT496\\BVH files\\01\\01_01.bvh");
 		BvhFileData bvhFileData=bvhFileReader.getCurrentBvhFileDataAsObject();
 		
 		RotationLimit rotationLimit=new RotationLimit();
 		Core core=new Core(bvhFileData,rotationLimit);
-		core.applyLimitOnAFrame(0);
+		
+		core.execute();
+		
+		core.writeFixedFile();
 	}
 
 }
