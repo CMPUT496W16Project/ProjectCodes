@@ -66,6 +66,8 @@ public class DirectionCalculator {
 			return null;
 		}
 		
+		
+		// Get the up axis direction
 		if(spine.getOffset(upAxisIndex)>=0){
 			upDirection=1;
 		}
@@ -81,6 +83,7 @@ public class DirectionCalculator {
 		Double upperLegAxisAAvg=(upperLegA.getOffset(angleRelatedAxis.get(0))+upperLegB.getOffset(angleRelatedAxis.get(0)))/2;
 		Double upperLegAxisBAvg=(upperLegA.getOffset(angleRelatedAxis.get(1))+upperLegB.getOffset(angleRelatedAxis.get(1)))/2;
 		
+		// Get the facing axis direction
 		if(spine.getOffset(angleRelatedAxis.get(1))>0 && upperLegAxisBAvg>0){
 			faceDirection=1;
 		}
@@ -110,6 +113,39 @@ public class DirectionCalculator {
 		if(faceAxisIndex==2){
 			faceDirection=-faceDirection;
 		}
+		
+		//
+		int remainAxisIndex=-1;
+		int remainDirection=0;
+		
+		if(faceAxisIndex==0 && upAxisIndex==1){
+			remainAxisIndex=2;
+			if((faceDirection==1 && upDirection==1) || (faceDirection==-1 && upDirection==-1)){
+				remainDirection=-1;
+			}
+			else if((faceDirection==1 && upDirection==-1)||(faceDirection==-1 && upDirection==1)){
+				remainDirection=1;
+			}
+		}
+		else if(faceAxisIndex==0 && upAxisIndex==2){
+			remainAxisIndex=1;
+			if((faceDirection==1 && upDirection==1) || (faceDirection==-1 && upDirection==-1)){
+				remainDirection=1;
+			}
+			else if((faceDirection==1 && upDirection==-1)||(faceDirection==-1 && upDirection==1)){
+				remainDirection=-1;
+			}
+		}
+		else if(faceAxisIndex==1 && upAxisIndex==2){
+			remainAxisIndex=0;
+			if((faceDirection==1 && upDirection==1) || (faceDirection==-1 && upDirection==-1)){
+				remainDirection=1;
+			}
+			else if((faceDirection==1 && upDirection==-1)||(faceDirection==-1 && upDirection==1)){
+				remainDirection=-1;
+			}
+		}
+		//
 		
 		Map<String,Integer> directionInformation=new HashMap<String,Integer>();
 		directionInformation.put("Face Direction",faceDirection);
