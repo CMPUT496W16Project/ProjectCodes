@@ -152,6 +152,8 @@ public class DirectionCalculator {
 		directionInformation.put("Face Axis",faceAxisIndex);
 		directionInformation.put("Up Direction",upDirection);
 		directionInformation.put("Up Axis",upAxisIndex);
+		directionInformation.put("Remain Axis",remainAxisIndex);
+		directionInformation.put("Remain Direction",remainDirection);
 		
 		return directionInformation;
 	}

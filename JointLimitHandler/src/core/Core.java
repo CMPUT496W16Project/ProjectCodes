@@ -25,6 +25,7 @@ public class Core {
 	private Integer upDirection;
 	
 	private String remainAxis;
+	private Integer remainDirection;
 	
 	//=====================
 	
@@ -49,6 +50,7 @@ public class Core {
 		System.out.println("Up axis             : "+this.upAxis);
 		System.out.println("Up direction        : "+this.upDirection);
 		System.out.println("Remain Axis         : "+this.remainAxis);
+		System.out.println("Remain direction    : "+this.remainDirection);
 		System.out.println("------------------------------------------");
 	}
 	
@@ -57,30 +59,24 @@ public class Core {
 		DirectionCalculator directionCalculator=new DirectionCalculator(this.tree);
 		Map<String,Integer> directionInformation=directionCalculator.getDirectionInfromation();
 		
-		ArrayList<String> axises=new ArrayList<String>();
+		ArrayList<String> axis=new ArrayList<String>();
 		
-		axises.add("X");
-		axises.add("Z");
-		axises.add("Y");
+		axis.add("X");
+		axis.add("Z");
+		axis.add("Y");
 		
 		int faceAxisIndex=directionInformation.get("Face Axis");
-		this.faceAxis=axises.get(faceAxisIndex);
+		this.faceAxis=axis.get(faceAxisIndex);
 		
 		int upAxisIndex=directionInformation.get("Up Axis");
-		this.upAxis=axises.get(upAxisIndex);
+		this.upAxis=axis.get(upAxisIndex);
 		
-		if(upAxisIndex>faceAxisIndex){
-			axises.remove(upAxisIndex);
-			axises.remove(faceAxisIndex);
-		}
-		else{
-			axises.remove(faceAxisIndex);
-			axises.remove(upAxisIndex);
-		}
+		int remainAxisIndex=directionInformation.get("Remain Axis");
+		this.remainAxis=axis.get(remainAxisIndex);
 		
-		this.remainAxis=axises.get(0);
 		this.faceDirection=directionInformation.get("Face Direction");
 		this.upDirection=directionInformation.get("Up Direction");
+		this.remainDirection=directionInformation.get("Remain Direction");
 	}
 	
 	public void applyLimitOnAFrame(int frameIndex){
