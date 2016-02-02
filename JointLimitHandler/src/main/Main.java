@@ -3,21 +3,19 @@ package main;
 import core.Core;
 import modules.BvhFileData;
 import modules.BvhFileReader;
-import modules.DirectionCalculator;
-import modules.TreeConverter;
-import tree.Tree;
+import modules.RotationLimit;
 
 public class Main {
 
 	public static void main(String[] args){
 		
 		BvhFileReader bvhFileReader=new BvhFileReader();
-		bvhFileReader.setBvhFilePath("C:\\Users\\Xuping Fang\\Desktop\\CMPUT496\\BVH files\\Test.bvh");
+		bvhFileReader.setBvhFilePath("XXXXXXXXX");
 		BvhFileData bvhFileData=bvhFileReader.getCurrentBvhFileDataAsObject();
 		
-		
-		Core core=new Core(bvhFileData);
-		
+		RotationLimit rotationLimit=new RotationLimit();
+		Core core=new Core(bvhFileData,rotationLimit);
+		core.applyLimitOnAFrame(0);
 	}
 
 }
