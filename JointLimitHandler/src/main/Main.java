@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args){
 		
 		BvhFileReader bvhFileReader=new BvhFileReader();
-		bvhFileReader.setBvhFilePath("XXXXXXXXX");
+		bvhFileReader.setBvhFilePath("XXXXX");
 		BvhFileData bvhFileData=bvhFileReader.getCurrentBvhFileDataAsObject();
 		
 		RotationLimit rotationLimit=new RotationLimit();
@@ -18,7 +18,7 @@ public class Main {
 		
 		core.execute();
 		
-		core.writeFixedFile();
+		core.writeFixedFile("XXXXX");
 	}
 
 }

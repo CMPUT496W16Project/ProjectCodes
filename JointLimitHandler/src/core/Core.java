@@ -201,12 +201,12 @@ public class Core {
 		return reverse;
 	}
 	
-	public void writeFixedFile(){
+	public void writeFixedFile(String fixedFilePath){
 		
 		PrintWriter printWriter;
 		
 		try {
-			printWriter = new PrintWriter("XXXXXXXXX","UTF-8");
+			printWriter = new PrintWriter(fixedFilePath,"UTF-8");
 			
 			// Write the header of the file.
 			for(String line : this.bvhFileData.getBvhHeader()){
