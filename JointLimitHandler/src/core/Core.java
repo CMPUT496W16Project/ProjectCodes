@@ -41,6 +41,7 @@ public class Core {
 		//Populate the tree class.
 		TreeConverter treeConverter=new TreeConverter();
 		this.tree=treeConverter.convert(this.bvhFileData.getBvhHeader());
+		
 		this.tree.printAllNodeInformation();
 		
 		// Get the direction information.
@@ -93,6 +94,19 @@ public class Core {
 		//System.out.println("Start check frame "+frameIndex);
 		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"LeftUpLeg");
 		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"RightUpLeg");
+		
+		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"LeftLeg");
+		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"RightLeg");
+		
+		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"Head");
+		
+		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"LeftArm");
+		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"RightArm");
+		
+		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"LeftForeArm");
+		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"RightForeArm");
+		
+		this.applyLimitOnANode(this.bvhFileData.getFrameByFrameIndex(frameIndex),"Spine");
 		//System.out.println("==================");
 	}
 	
@@ -165,29 +179,29 @@ public class Core {
 		//=======================================================
 		
 		if(frame.get(faceAxisChannelIndex)>faceAxisbounds.get(1)){
-			System.out.println("Bad angle : "+frame.get(faceAxisChannelIndex)+"  in faceAxis of node: "+nodeName+", resetValue");
+			//System.out.println("Bad angle : "+frame.get(faceAxisChannelIndex)+"  in faceAxis of node: "+nodeName+", resetValue");
 			frame.set(faceAxisChannelIndex,faceAxisbounds.get(1));
 		}
 		else if(frame.get(faceAxisChannelIndex)<faceAxisbounds.get(0)){
-			System.out.println("Bad angle : "+frame.get(faceAxisChannelIndex)+" in faceAxis of node: "+nodeName+", resetValue");
+			//System.out.println("Bad angle : "+frame.get(faceAxisChannelIndex)+" in faceAxis of node: "+nodeName+", resetValue");
 			frame.set(faceAxisChannelIndex,faceAxisbounds.get(0));
 		}
 		
 		if(frame.get(upAxisChannelIndex)>upAxisbounds.get(1)){
-			System.out.println("Bad angle : "+frame.get(upAxisChannelIndex)+" in upAxis of node: "+nodeName+", resetValue");
+			//System.out.println("Bad angle : "+frame.get(upAxisChannelIndex)+" in upAxis of node: "+nodeName+", resetValue");
 			frame.set(upAxisChannelIndex,upAxisbounds.get(1));
 		}
 		else if(frame.get(upAxisChannelIndex)<upAxisbounds.get(0)){
-			System.out.println("Bad angle : "+frame.get(upAxisChannelIndex)+" in upAxis of node: "+nodeName+", resetValue");
+			//System.out.println("Bad angle : "+frame.get(upAxisChannelIndex)+" in upAxis of node: "+nodeName+", resetValue");
 			frame.set(upAxisChannelIndex,upAxisbounds.get(0));
 		}
 		
 		if(frame.get(remainAxisChannelIndex)>remainAxisbounds.get(1)){
-			System.out.println("Bad angle : "+frame.get(remainAxisChannelIndex)+" in remainAxis of node: "+nodeName+", resetValue");
+			//System.out.println("Bad angle : "+frame.get(remainAxisChannelIndex)+" in remainAxis of node: "+nodeName+", resetValue");
 			frame.set(remainAxisChannelIndex,remainAxisbounds.get(1));
 		}
 		else if(frame.get(remainAxisChannelIndex)<remainAxisbounds.get(0)){
-			System.out.println("Bad angle : "+frame.get(remainAxisChannelIndex)+" in remainAxis of node: "+nodeName+", resetValue");
+			//System.out.println("Bad angle : "+frame.get(remainAxisChannelIndex)+" in remainAxis of node: "+nodeName+", resetValue");
 			frame.set(remainAxisChannelIndex,remainAxisbounds.get(0));
 		}
 	}
