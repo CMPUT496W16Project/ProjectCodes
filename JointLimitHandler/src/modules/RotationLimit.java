@@ -20,24 +20,24 @@ public class RotationLimit {
 	
 	private void populateRule(){
 		
-		this.popluateLeftLegRule();
-		this.popluateRightLegRule();
+		this.populateLeftLegRule();
+		this.populateRightLegRule();
 		
-		this.popluateHeadRule();
+		this.populateHeadRule();
 		
 		this.populateLeftForeArmRule();
 		this.populateRightForeArmRule();
 		
-		this.popluateLeftUpLegRule();
-		this.popluateRightUpLegRule();
+		this.populateLeftUpLegRule();
+		this.populateRightUpLegRule();
 		
-		this.popluateSpineRule();
+		this.populateSpineRule();
 		
 		this.populateLeftArmRule();
 		this.populateRightArmRule();
 	}
 	
-	private void popluateHeadRule(){
+	private void populateHeadRule(){
 		Map<String,ArrayList<Double>> rule=new HashMap<String,ArrayList<Double>>();
 		
 		ArrayList<Double> faceAxisbounds=new ArrayList<Double>();
@@ -148,7 +148,7 @@ public class RotationLimit {
 		this.limitBook.put("RightArm",rule);
 	}
 	
-	private void popluateSpineRule(){
+	private void populateSpineRule(){
 		Map<String,ArrayList<Double>> rule=new HashMap<String,ArrayList<Double>>();
 		
 		ArrayList<Double> faceAxisbounds=new ArrayList<Double>();
@@ -170,7 +170,7 @@ public class RotationLimit {
 		this.limitBook.put("Spine",rule);
 	}
 	
-	private void popluateLeftUpLegRule(){
+	private void populateLeftUpLegRule(){
 		Map<String,ArrayList<Double>> rule=new HashMap<String,ArrayList<Double>>();
 		
 		ArrayList<Double> faceAxisbounds=new ArrayList<Double>();
@@ -192,7 +192,7 @@ public class RotationLimit {
 		this.limitBook.put("LeftUpLeg",rule);
 	}
 	
-	private void popluateRightUpLegRule(){
+	private void populateRightUpLegRule(){
 		Map<String,ArrayList<Double>> rule=new HashMap<String,ArrayList<Double>>();
 		
 		ArrayList<Double> faceAxisbounds=new ArrayList<Double>();
@@ -214,7 +214,7 @@ public class RotationLimit {
 		this.limitBook.put("RightUpLeg",rule);
 	}
 	
-	private void popluateLeftLegRule(){
+	private void populateLeftLegRule(){
 		Map<String,ArrayList<Double>> rule=new HashMap<String,ArrayList<Double>>();
 		
 		ArrayList<Double> faceAxisbounds=new ArrayList<Double>();
@@ -236,7 +236,7 @@ public class RotationLimit {
 		this.limitBook.put("LeftLeg",rule);
 	}
 	
-	private void popluateRightLegRule(){
+	private void populateRightLegRule(){
 		Map<String,ArrayList<Double>> rule=new HashMap<String,ArrayList<Double>>();
 		
 		ArrayList<Double> faceAxisbounds=new ArrayList<Double>();
