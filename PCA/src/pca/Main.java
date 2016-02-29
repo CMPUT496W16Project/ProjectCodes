@@ -1,13 +1,26 @@
 package pca;
 
+import java.util.Arrays;
+
+import Jama.Matrix;
+
 public class Main {
 
 	public static void main(String[] args) {
 		SampleReader sampleReader=new SampleReader();
-		sampleReader.setBvhFilePath("XXXXXXXX");
+		sampleReader.setBvhFilePath("C:\\Users\\Xuping Fang\\Desktop\\CMPUT496\\BVH files\\01\\X.bvh");
 		sampleReader.readCurrentBvhFileAsSample();
-		sampleReader.getSampleFrames();
-		sampleReader.getStdErrs();
+		
+		MatrixConverter mc=new MatrixConverter();
+		
+		// Matrix sampleData=mc.convertMatrix(sampleReader.getSampleFrames());
+		Matrix stdErr=mc.convertMatrix(sampleReader.getStdErrsOfCurrentSample());
+		
+		CovarianceMatrixConverter cmc=new CovarianceMatrixConverter(stdErr);
+		
+		Matrix covarianceMatrix=cmc.getCovatianceMatrix();
+		
+		System.out.println(Arrays.deepToString(covarianceMatrix.getArrayCopy()));
 	}
 
 }

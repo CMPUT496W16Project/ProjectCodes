@@ -27,24 +27,6 @@ public class SampleReader {
 		return cpy;
 	}
 	
-	private ArrayList<Double> getStdErr(ArrayList<Double> src){
-		
-		Double sum=0.0;
-		for(Double data : src){
-			sum+=data;
-		}
-		
-		Double avg=sum/src.size();
-		
-		ArrayList<Double> stdErr=new ArrayList<Double>();
-		
-		for(Double data : src){
-			stdErr.add(data-avg);
-		}
-		
-		return stdErr;
-	}
-	
 	public void setBvhFilePath(String bvhFilePath){
 		this.bvhFilePath=bvhFilePath;
 	}
@@ -93,9 +75,9 @@ public class SampleReader {
 				
 				for(int dataIndex=0;dataIndex<currentFrameArray.length;dataIndex++){
 					
-					if(dataIndex>2){
+					//if(dataIndex>2){
 						currentFrame.add(Double.parseDouble(currentFrameArray[dataIndex]));
-					}
+					//}
 				}
 				
 				sampleFrames.put(frameIndex,this.makeCopy(currentFrame));
@@ -124,18 +106,38 @@ public class SampleReader {
 		return this.sampleFrames;
 	}
 	
-	public Map<Integer,ArrayList<Double>> getStdErrs(){
+	public Map<Integer,ArrayList<Double>> getStdErrsOfCurrentSample(){
 		
 		if(this.sampleFrames==null){
 			return null;
 		}
 		
-		Map<Integer,ArrayList<Double>> stdErrs = new HashMap<Integer,ArrayList<Double>>();
+		ArrayList<Double> avgs=new ArrayList<Double>();
 		
-		for(int frameIndex=0; frameIndex<this.sampleFrames.size();frameIndex++){
-			stdErrs.put(frameIndex,this.getStdErr(this.sampleFrames.get(frameIndex)));
+		for(int rowIndex=0;rowIndex<this.sampleFrames.get(0).size();rowIndex++){
+			
+			double dSum=0.0;
+			for(int colIndex=0;colIndex<this.sampleFrames.size();colIndex++){
+				dSum+=this.sampleFrames.get(colIndex).get(rowIndex);
+			}
+			
+			avgs.add(dSum/this.sampleFrames.size());
 		}
 		
+		
+		Map<Integer,ArrayList<Double>> stdErrs = new HashMap<Integer,ArrayList<Double>>();
+		ArrayList<Double> stdErrOfAFrame=new ArrayList<Double>();
+		
+		for(int colIndex=0;colIndex<this.sampleFrames.size();colIndex++){
+			
+			for(int rowIndex=0;rowIndex<this.sampleFrames.get(0).size();rowIndex++){
+				Double orginalVal=this.sampleFrames.get(colIndex).get(rowIndex);
+				stdErrOfAFrame.add(orginalVal-avgs.get(rowIndex));
+			}
+			
+			stdErrs.put(colIndex,this.makeCopy(stdErrOfAFrame));
+			stdErrOfAFrame.clear();
+		}
 		
 		//
 		for(int frameIndex=0;frameIndex<stdErrs.size();frameIndex++){
