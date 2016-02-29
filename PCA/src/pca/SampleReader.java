@@ -73,7 +73,10 @@ public class SampleReader {
 				String[] currentFrameArray = line.split("\\s+");
 				
 				for(int dataIndex=0;dataIndex<currentFrameArray.length;dataIndex++){
-					currentFrame.add(Double.parseDouble(currentFrameArray[dataIndex]));
+					
+					if(dataIndex>2){
+						currentFrame.add(Double.parseDouble(currentFrameArray[dataIndex]));
+					}
 				}
 				
 				sampleFrames.put(frameIndex,this.makeCopy(currentFrame));
@@ -91,5 +94,28 @@ public class SampleReader {
 		
 		return sampleFrames;
 	}
+	
+	public void convertMatrix(){
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
