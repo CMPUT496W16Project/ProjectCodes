@@ -2,6 +2,7 @@ package pca;
 
 import java.util.Arrays;
 
+import Jama.EigenvalueDecomposition;
 import Jama.Matrix;
 
 public class Main {
@@ -19,8 +20,11 @@ public class Main {
 		CovarianceMatrixConverter cmc=new CovarianceMatrixConverter(stdErr);
 		
 		Matrix covarianceMatrix=cmc.getCovatianceMatrix();
-		
 		System.out.println(Arrays.deepToString(covarianceMatrix.getArrayCopy()));
+		
+		EigenvalueDecomposition ed=covarianceMatrix.eig();
+		Matrix eigenvectorMatrix=ed.getV();
+		System.out.println(Arrays.deepToString(eigenvectorMatrix.getArrayCopy()));
 	}
 
 }

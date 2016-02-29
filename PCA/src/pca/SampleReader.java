@@ -95,14 +95,14 @@ public class SampleReader {
 	}
 	
 	public Map<Integer,ArrayList<Double>> getSampleFrames(){
-		//
+		/*
 		for(int frameIndex=0;frameIndex<this.sampleFrames.size();frameIndex++){
 			for(Double val : this.sampleFrames.get(frameIndex)){
 				System.out.print(val.toString()+" ");
 			}
 			System.out.println("");
 		}
-		//
+		*/
 		return this.sampleFrames;
 	}
 	
@@ -139,14 +139,14 @@ public class SampleReader {
 			stdErrOfAFrame.clear();
 		}
 		
-		//
+		/*
 		for(int frameIndex=0;frameIndex<stdErrs.size();frameIndex++){
 			for(Double val : stdErrs.get(frameIndex)){
 				System.out.print(val.toString()+" ");
 			}
 			System.out.println("");
 		}
-		//
+		*/
 		
 		return stdErrs;
 	}
