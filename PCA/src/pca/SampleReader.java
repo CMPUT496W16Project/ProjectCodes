@@ -75,9 +75,9 @@ public class SampleReader {
 				
 				for(int dataIndex=0;dataIndex<currentFrameArray.length;dataIndex++){
 					
-					//if(dataIndex>2){
+					if(dataIndex>2){
 						currentFrame.add(Double.parseDouble(currentFrameArray[dataIndex]));
-					//}
+					}
 				}
 				
 				sampleFrames.put(frameIndex,this.makeCopy(currentFrame));
