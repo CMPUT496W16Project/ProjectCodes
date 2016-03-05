@@ -18,17 +18,12 @@ public class Main {
 		String bvhFilePath=sc.next();
 		
 		SampleReader sampleReader=new SampleReader();
-<<<<<<< HEAD
-		sampleReader.setBvhFilePath("C:\\Users\\Xuping Fang\\Desktop\\CMPUT496\\BVH files\\01\\X.bvh");
-=======
 		sampleReader.setBvhFilePath(bvhFilePath);
 		
 		String txtFilePath=bvhFilePath+".txt";
 		
 		sc.close();
-		
-		//*************************************************************
->>>>>>> origin/master
+
 		sampleReader.readCurrentBvhFileAsSample();
 		
 		MatrixConverter mc=new MatrixConverter();
