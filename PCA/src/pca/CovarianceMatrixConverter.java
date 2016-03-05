@@ -44,7 +44,8 @@ public class CovarianceMatrixConverter {
 		for(int colIndex=0;colIndex<this.src.getColumnDimension();colIndex++){
 			
 			for(int rowIndex=0;rowIndex<this.src.getColumnDimension();rowIndex++){
-				covatianceMatrix.set(colIndex, rowIndex,this.getCovatiance(colIndex,rowIndex));
+				
+				covatianceMatrix.set(colIndex,rowIndex,this.getCovatiance(colIndex,rowIndex));
 			}
 		}
 		
