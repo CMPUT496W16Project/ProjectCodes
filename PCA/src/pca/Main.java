@@ -60,12 +60,14 @@ public class Main {
 			
 			for(int index=0;index<compressedData.getRowDimension();index++){
 				
-				String line="";
-				line+=Double.toString(compressedDataArray[index][0]);
-				line+=" ";
-				line+=Double.toString(compressedDataArray[index][1]);
+				if(index%3==0){
+					String line="";
+					line+=Double.toString(compressedDataArray[index][0]);
+					line+=" ";
+					line+=Double.toString(compressedDataArray[index][1]);
+					printWriter.println(line);
+				}
 				
-				printWriter.println(line);
 			}
 			
 			printWriter.close();
