@@ -30,15 +30,11 @@ public class Main {
 		
 		Matrix sampleData=mc.convertMatrix(sampleReader.getSampleFrames());
 		Matrix stdErr=mc.convertMatrix(sampleReader.getStdErrsOfCurrentSample());
-		
 		CovarianceMatrixConverter cmc=new CovarianceMatrixConverter(stdErr);
-		
 		Matrix covarianceMatrix=cmc.getCovatianceMatrix();
-		
 		EigenvalueDecomposition ed=covarianceMatrix.eig();
-		
 		ArrayList<Integer> maxIndexList=Sort.getMax(ed.getD());
-		
+		System.out.println("FLAG7");
 		double[][] eigArray=ed.getV().getArrayCopy();
 		double[][] maxEigArray=new double[ed.getV().getRowDimension()][2];
 		
@@ -57,10 +53,9 @@ public class Main {
 		PrintWriter printWriter;
 		try {
 			printWriter = new PrintWriter(txtFilePath,"UTF-8");
-			
 			for(int index=0;index<compressedData.getRowDimension();index++){
 				
-				if(index%3==0){
+				if(index%2==0){
 					String line="";
 					line+=Double.toString(compressedDataArray[index][0]);
 					line+=" ";
