@@ -29,13 +29,23 @@ public class Main {
 		MatrixConverter mc=new MatrixConverter();
 		
 		Matrix sampleData=mc.convertMatrix(sampleReader.getSampleFrames());
+		
 		Matrix stdErr=mc.convertMatrix(sampleReader.getStdErrsOfCurrentSample());
+		
 		CovarianceMatrixConverter cmc=new CovarianceMatrixConverter(stdErr);
+		
 		Matrix covarianceMatrix=cmc.getCovatianceMatrix();
+		
+		// System.out.println("FLAG6");
+		
 		EigenvalueDecomposition ed=covarianceMatrix.eig();
+		
+		// System.out.println("FLAG7");
+		
 		ArrayList<Integer> maxIndexList=Sort.getMax(ed.getD());
-		System.out.println("FLAG7");
+		
 		double[][] eigArray=ed.getV().getArrayCopy();
+		
 		double[][] maxEigArray=new double[ed.getV().getRowDimension()][2];
 		
 		for(int index=0;index<ed.getV().getRowDimension();index++){
