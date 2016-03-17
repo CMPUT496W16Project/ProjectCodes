@@ -75,9 +75,13 @@ public class SampleReader {
 				
 				for(int dataIndex=0;dataIndex<currentFrameArray.length;dataIndex++){
 					
-					if(dataIndex>2 && (dataIndex<45 && dataIndex>53) && (dataIndex<63 && dataIndex>74) && (dataIndex<84 && dataIndex>95) && (dataIndex<15 && dataIndex>20) && (dataIndex<30 && dataIndex>35)){
+					if(dataIndex<=2 || (dataIndex>=45 && dataIndex<=53) || (dataIndex>=63 && dataIndex<=74) || (dataIndex>=84 && dataIndex<=95) || (dataIndex>=15 && dataIndex<=20) || (dataIndex>=30 && dataIndex<=35)){
+						// PASS
+					}
+					else{
 						currentFrame.add(Double.parseDouble(currentFrameArray[dataIndex]));
 					}
+					
 				}
 				
 				sampleFrames.put(frameIndex,this.makeCopy(currentFrame));
