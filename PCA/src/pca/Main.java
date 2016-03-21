@@ -61,6 +61,7 @@ public class Main {
 		double[][] compressedDataArray=compressedData.getArrayCopy();
 		
 		PrintWriter printWriter;
+		
 		try {
 			printWriter = new PrintWriter(txtFilePath,"UTF-8");
 			for(int index=0;index<compressedData.getRowDimension();index++){
